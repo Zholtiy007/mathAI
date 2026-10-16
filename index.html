@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MathPath AI — Differentiated Learning</title>
+<style>
+:root{--ink:#18313a;--muted:#61747b;--teal:#087f8c;--mint:#e6f6f3;--paper:#f7faf9;--line:#dce8e6;--white:#fff;--gold:#f2b84b}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:linear-gradient(120deg,#0b5965,#078c91);color:white;padding:28px 20px 32px} .wrap{max-width:1080px;margin:auto}
+.brand{font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.9}.hero{display:grid;grid-template-columns:1.5fr 1fr;gap:30px;align-items:center;margin-top:20px}
+h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:0 0 14px;letter-spacing:-.04em}header p{color:#dff7f5;max-width:650px;margin:0}
+.hero-card{background:#ffffff16;border:1px solid #ffffff40;border-radius:20px;padding:20px}.hero-card small{opacity:.8}.hero-card strong{display:block;font-size:1.3rem;margin:6px 0}
+main{padding:28px 20px 60px}.layout{display:grid;grid-template-columns:300px 1fr;gap:22px;align-items:start}
+.panel,.content-card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 28px #173c4208}
+h2{font-size:1.25rem;margin:0 0 12px}h3{font-size:1rem;margin:0 0 8px}.muted{color:var(--muted)}.label{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin:18px 0 8px}
+select,input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:white;color:var(--ink);font:inherit}
+.levels{display:grid;gap:8px}.level{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer}.level input{width:auto;accent-color:var(--teal)}.level:has(input:checked){border-color:var(--teal);background:var(--mint)}
+button{border:0;border-radius:11px;padding:12px 15px;background:var(--teal);color:white;font-weight:750;font:inherit;cursor:pointer;transition:.15s}button:hover{filter:brightness(.94);transform:translateY(-1px)}button:disabled{opacity:.55;cursor:wait;transform:none}.secondary{background:#edf5f4;color:var(--teal);border:1px solid var(--line)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.full{width:100%;margin-top:16px}
+.problem{background:var(--mint);border:1px solid #c6e8e2;border-radius:14px;padding:18px;margin:12px 0}.problem .math{font-size:1.45rem;font-weight:800;letter-spacing:.01em}.pill{display:inline-block;background:#d3eeea;color:#075f67;font-weight:800;font-size:.75rem;padding:4px 9px;border-radius:999px;margin-bottom:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.subcard{background:#fbfdfd;border:1px solid var(--line);border-radius:14px;padding:16px}.subcard ol,.subcard ul{padding-left:20px}.status{font-size:.9rem;color:var(--muted);margin-top:10px;min-height:1.4em}.hidden{display:none!important}.divider{height:1px;background:var(--line);margin:18px 0}.notice{background:#fff7e5;border:1px solid #f5dfaa;padding:12px;border-radius:12px;font-size:.9rem}.footer{text-align:center;color:var(--muted);font-size:.85rem;padding:18px}
+@media(max-width:760px){.hero,.layout,.grid2{grid-template-columns:1fr}.hero-card{max-width:420px}.panel{order:0}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="brand">MathPath AI · Educational Technology</div>
+<div class="hero">
+<div><h1>One math idea.<br>Three ways to learn.</h1><p>An AI-powered math differentiator that adapts hints, explanations, and challenge level to the learner. Start with linear equations and choose the support you need.</p></div>
+<div class="hero-card"><small>CORE MATHEMATICS TASK</small><strong>Solve a linear equation</strong><span>Example: 3x + 5 = 20</span><div style="margin-top:12px">Foundation · Standard · Advanced</div></div>
+</div></div></header>
+<main class="wrap"><div class="layout">
+<aside class="panel">
+<h2>Learning settings</h2><p class="muted">Choose a level and personalize the practice.</p>
+<label class="label" for="topic">Math topic</label><select id="topic"><option value="linear">Linear equations</option><option value="factor">Factoring expressions</option></select>
+<label class="label">Difficulty level</label>
+<div class="levels">
+<label class="level"><input type="radio" name="level" value="foundation" checked><span><b>Level 1 · Foundation</b><br><small class="muted">Guided steps and direct hints</small></span></label>
+<label class="level"><input type="radio" name="level" value="standard"><span><b>Level 2 · Standard</b><br><small class="muted">Grade-level independent solving</small></span></label>
+<label class="level"><input type="radio" name="level" value="advanced"><span><b>Level 3 · Advanced</b><br><small class="muted">Multi-step and real-world reasoning</small></span></label>
+</div>
+<label class="label" for="grade">Grade / learner stage</label><select id="grade"><option>Grade 7–8</option><option>Grade 5–6</option><option>Grade 9–10</option></select>
+<label class="label" for="student">What do you find difficult? (optional)</label><textarea id="student" rows="3" placeholder="e.g. I forget to do the same operation on both sides."></textarea>
+<button id="generate" class="full">Generate adapted task</button>
+<div class="status" id="status" aria-live="polite">Ready to practice.</div>
+<div class="divider"></div>
+<div class="notice"><b>Demo mode:</b> This version works without an API key using prepared examples. Add a backend API key to enable live AI-generated tasks.</div>
+</aside>
+<section class="content-card">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><div><span class="pill" id="levelTag">LEVEL 1 · FOUNDATION</span><h2 id="taskTitle">Solve the equation step by step</h2></div><button class="secondary" id="newTask">Another example</button></div>
+<div class="problem"><div class="muted" style="font-size:.85rem;font-weight:700">YOUR TASK</div><div class="math" id="problem">3x + 5 = 20</div><p id="context" style="margin-bottom:0">Find the value of x. You can reveal hints one at a time.</p></div>
+<div class="grid2">
+<div class="subcard"><h3><span aria-hidden="true">💡</span> Hints</h3><p class="muted" id="hintText">Hint 1: What number is added to 3x?</p><div class="actions"><button class="secondary" id="hintBtn">Show next hint</button></div><p class="status" id="hintCount">0 of 3 hints revealed</p></div>
+<div class="subcard"><h3><span aria-hidden="true">✍️</span> Try it yourself</h3><label for="answer" class="muted">Your answer for x</label><input id="answer" placeholder="Enter your answer" autocomplete="off"><div class="actions"><button id="check">Check answer</button><button class="secondary" id="solutionBtn">Show solution</button></div><p class="status" id="feedback" aria-live="polite"></p></div>
+</div>
+<div class="divider"></div><div class="subcard"><h3>Solution & explanation</h3><div id="solution" class="muted">Try the task first, or select “Show solution” when you are ready.</div></div>
+<div class="divider"></div><div class="subcard"><h3>How differentiation works</h3><ul><li><b>Foundation:</b> smaller numbers, guided steps, and direct hints.</li><li><b>Standard:</b> typical curriculum practice with fewer prompts.</li><li><b>Advanced:</b> more complex equations or a contextual challenge.</li></ul><p class="muted">The level changes the task, scaffolding, and explanation—not just the label.</p></div>
+</section></div><div class="footer">MathPath AI · A student project for AI for Differentiated Learning</div></main>
+<script>
+const banks = {
+ linear: {
+ foundation:[
+  {p:"x + 4 = 11",c:"Find x. Undo the addition to isolate the variable.",a:"7",h:["What number is added to x?","Subtract 4 from both sides.","11 − 4 = x."],s:["Start with x + 4 = 11.","Subtract 4 from both sides: x = 11 − 4.","Therefore, x = 7."]},
+  {p:"2x = 18",c:"Find x. x is multiplied by 2.",a:"9",h:["x is multiplied by 2.","Divide both sides by 2.","18 ÷ 2 = x."],s:["Start with 2x = 18.","Divide both sides by 2: x = 18 ÷ 2.","Therefore, x = 9."]},
+  {p:"3x + 2 = 14",c:"Find x. Undo operations in reverse order.",a:"4",h:["First undo the +2.","Subtract 2: 3x = 12.","Divide both sides by 3."],s:["3x + 2 = 14.","Subtract 2: 3x = 12.","Divide by 3: x = 4."]}
+ ],
+ standard:[
+  {p:"4x − 7 = 21",c:"Solve the equation and show the inverse operation used at each step.",a:"7",h:["Isolate the term containing x first.","Add 7 to both sides: 4x = 28.","Divide both sides by 4."],s:["4x − 7 = 21.","Add 7 to both sides: 4x = 28.","Divide by 4: x = 7."]},
+  {p:"5(x − 2) = 30",c:"Use the distributive property or divide first, then solve.",a:"8",h:["You can divide both sides by 5 first.","x − 2 = 6.","Add 2 to both sides."],s:["5(x − 2) = 30.","Divide both sides by 5: x − 2 = 6.","Add 2: x = 8."]},
+  {p:"3x + 8 = 2x + 17",c:"Collect variable terms on one side and constants on the other.",a:"9",h:["Subtract 2x from both sides.","You get x + 8 = 17.","Subtract 8 from both sides."],s:["3x + 8 = 2x + 17.","Subtract 2x: x + 8 = 17.","Subtract 8: x = 9."]}
+ ],
+ advanced:[
+  {p:"3(2x − 5) + 4 = 2(x + 7) + 9",c:"Solve the multi-step equation. Expand brackets, collect like terms, then check your result.",a:"8.5",h:["Expand both brackets carefully.","Simplify to 6x − 11 = 2x + 23.","Subtract 2x, then add 11."],s:["Expand: 6x − 15 + 4 = 2x + 14 + 9.","Simplify: 6x − 11 = 2x + 23.","Subtract 2x: 4x − 11 = 23. Add 11: 4x = 34, so x = 8.5."]},
+  {p:"A taxi charges 700 KZT plus 180 KZT per kilometre. The total fare is 2500 KZT. How many kilometres was the trip?",c:"Model the situation with a linear equation and interpret your answer.",a:"10",h:["Let x be the number of kilometres.","Write 700 + 180x = 2500.","Subtract 700, then divide by 180."],s:["Let x be the distance in kilometres.","700 + 180x = 2500.","180x = 1800, so x = 10 km."]},
+  {p:"4(2x − 3) = 5x + 9",c:"Solve and verify by substituting your answer into the original equation.",a:"7",h:["Expand the left side.","You get 8x − 12 = 5x + 9.","Subtract 5x and add 12."],s:["Expand: 8x − 12 = 5x + 9.","Subtract 5x: 3x − 12 = 9.","Add 12: 3x = 21, so x = 7. Check: 4(14 − 3) = 44 and 35 + 9 = 44."]}
+ ]
+ },
+ factor:{
+ foundation:[
+  {p:"x² + 3x",c:"Factor out the greatest common factor.",a:"x(x+3)",h:["Both terms contain x.","Take x outside the brackets.","x² ÷ x = x and 3x ÷ x = 3."],s:["The common factor is x.","Divide each term by x: x² ÷ x = x and 3x ÷ x = 3.","So x² + 3x = x(x + 3)."]},
+  {p:"2x + 8",c:"Find the greatest common factor of both terms.",a:"2(x+4)",h:["Both terms are divisible by 2.","Put 2 outside the brackets.","Divide each term by 2."],s:["The greatest common factor is 2.","2x ÷ 2 = x and 8 ÷ 2 = 4.","So 2x + 8 = 2(x + 4)."]}
+ ],
+ standard:[
+  {p:"x² + 7x + 12",c:"Factor the trinomial into two binomials.",a:"(x+3)(x+4)",h:["Find two numbers whose product is 12.","Their sum must be 7.","The numbers are 3 and 4."],s:["We need two numbers with product 12 and sum 7.","Those numbers are 3 and 4.","Therefore, x² + 7x + 12 = (x + 3)(x + 4)."]}
+ ],
+ advanced:[
+  {p:"2x² − 7x + 3",c:"Factor completely. Look for two binomials whose product gives the quadratic.",a:"(2x−1)(x−3)",h:["Multiply the leading coefficient and constant: 2 × 3 = 6.","Find factors of 6 that add to −7: −6 and −1.","Split the middle term and factor by grouping."],s:["2x² − 7x + 3 = 2x² − 6x − x + 3.","Group: 2x(x − 3) − 1(x − 3).","Factor the common binomial: (2x − 1)(x − 3)."]}
+ ]
+ }
+};
+const levelNames={foundation:"LEVEL 1 · FOUNDATION",standard:"LEVEL 2 · STANDARD",advanced:"LEVEL 3 · ADVANCED"};
+let current=null, hintIndex=0, usedIndex=0;
+function level(){return document.querySelector('input[name="level"]:checked').value}
+function getBank(){let t=document.getElementById('topic').value,l=level();return banks[t][l]||banks[t].standard}
+function render(next=true){const arr=getBank(); if(next) usedIndex=(usedIndex+1)%arr.length; current=arr[usedIndex%arr.length];hintIndex=0;
+document.getElementById('levelTag').textContent=levelNames[level()];document.getElementById('taskTitle').textContent=level()==='foundation'?'Solve the equation step by step':level()==='standard'?'Solve the equation independently':'Take on the challenge';
+document.getElementById('problem').textContent=current.p;document.getElementById('context').textContent=current.c;
+document.getElementById('hintText').textContent=current.h[0];document.getElementById('hintCount').textContent='0 of '+current.h.length+' hints revealed';document.getElementById('hintBtn').disabled=false;
+document.getElementById('answer').value='';document.getElementById('feedback').textContent='';document.getElementById('solution').textContent='Try the task first, or select “Show solution” when you are ready.';document.getElementById('status').textContent='Task ready.'}
+document.getElementById('generate').onclick=()=>{usedIndex=-1;render(true);document.getElementById('status').textContent='Adapted task generated for '+level()+'.'};
+document.getElementById('newTask').onclick=()=>render(true);
+document.querySelectorAll('input[name="level"]').forEach(el=>el.addEventListener('change',()=>{usedIndex=-1;render(true);document.getElementById('status').textContent='Level updated.'}));
+document.getElementById('topic').onchange=()=>{usedIndex=-1;render(true)};
+document.getElementById('hintBtn').onclick=()=>{if(hintIndex<current.h.length){document.getElementById('hintText').textContent='Hint '+(hintIndex+1)+': '+current.h[hintIndex];hintIndex++;document.getElementById('hintCount').textContent=hintIndex+' of '+current.h.length+' hints revealed';if(hintIndex>=current.h.length)document.getElementById('hintBtn').disabled=true}};
+function norm(s){return s.toLowerCase().replace(/\s/g,'').replace(/²/g,'^2').replace(/−/g,'-')}
+document.getElementById('check').onclick=()=>{let v=norm(document.getElementById('answer').value),a=norm(current.a);let ok=v===a;document.getElementById('feedback').textContent=ok?'Correct! Well done. Now explain why your answer works.':'Not quite yet. Reveal a hint or check the inverse operation and try again.';document.getElementById('feedback').style.color=ok?'#087f55':'#a04d28'};
+document.getElementById('solutionBtn').onclick=()=>{document.getElementById('solution').innerHTML='<ol>'+current.s.map(x=>'<li>'+x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</li>').join('')+'</ol>'};
+render(false);
+</script>
+</body></html>
